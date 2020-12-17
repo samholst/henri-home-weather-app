@@ -11,29 +11,59 @@
 
   <br>
 
-  <button type="button" class="btn  btn-small" id="update">Update</button>
+  <button type="button" class="btn  btn-small btn-primary" id="update">Update</button>
 
   <br>
   <br>
 
   <form id="search-form" action="#">
-    <input type="text" placeholder="Enter Zip" id="zip" name="zip"></input>
+    <input type="number" placeholder="Enter Zip" id="zip" name="zip" required></input>
     <input type="submit" class="btn btn-small" id="search" value="Submit"></input>
-    <button type="button" class="btn btn-small" id="save">Save</input>
+    <button type="button" class="btn btn-small btn-success" id="save">Save</button>
   </form>
+
+  <h1>Saved Locations</h1>
+  <div id="saved-zip-list">
+    <ul>
+    <% @locations.each do |location| %>
+      <li class="location"><%= location.zip %></li>
+    <% end %>
+    </ul>
+  </div>
 </div>
 
 <script type="text/javascript">
   $(document).ready(function() {
-     $('#search-form').submit(function(e) {
-       var zip = $('#zip').val();
-       search(zip);
-       e.preventDefault();
+    $('#search-form').submit(function(e) {
+      var zip = $('#zip').val();
+      search(zip);
+      e.preventDefault();
+    })
+
+    $('#update').click(function() {
+      var zip = $('#current-zip').val();
+      search(zip);
      })
 
-     $('#update').click(function() {
-       var zip = $('#current-zip').val();
-       search(zip);
+    $('.location').click(function() {
+      var zip = $(this).text();
+      search(zip);
+    })
+
+    $('#save').click(function() {
+      var zip = $('#zip').val();
+      var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+      $.post( "/locations", { zip: zip, authenticity_token: csrf_token })
+        .done(function(data) {
+          $('#saved-zip-list ul').append(
+            "<li class='location'>" + data.location.zip + "</li>"
+          );
+          console.log("Data Loaded: ", data);
+        })
+        .fail(function(data) {
+          console.error("Data Failed: ", data);
+        });
      })
   });
 

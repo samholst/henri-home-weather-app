@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @locations = Location.all
   end
 
   def search
@@ -7,9 +8,9 @@ class PagesController < ApplicationController
     result = weather_forcast.get_result
 
     if result
-      render json: { successful: true, forcast: result }
+      render json: { status: :created, forcast: result }
     else
-      render json: { successful: false }
+      render json: { status: :unprocessable_entity }
     end
   end
 

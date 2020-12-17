@@ -15,7 +15,10 @@ module Weather
       zip_response = fetch(build_zip_enpoint_url)
 
       if zip_response && zip_response["coord"]
-        forcast_response = fetch(build_forcast_enpoint_url(zip_response["coord"]["lat"], zip_response["coord"]["lon"]))
+        forcast_response = fetch(
+            build_forcast_enpoint_url(zip_response["coord"]["lat"],
+            zip_response["coord"]["lon"])
+          )
         create_zip_forcast(forcast_response)
       else
         nil
