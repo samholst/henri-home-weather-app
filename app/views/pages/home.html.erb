@@ -63,7 +63,6 @@
           $('#saved-zip-list ul').append(
             "<li class='location'>" + data.location.zip + "</li>"
           );
-          console.log("Data Loaded: ", data);
         })
         .fail(function(data) {
           console.error("Data Failed: ", data);
@@ -91,7 +90,6 @@
         $('#average span').text(checkDisplayFormat(data.forecast.average));
         $('#current-temp span').text(checkDisplayFormat(data.forecast.current_temp));
         $('#current-zip').val(data.forecast.zip);
-        console.log("Data Loaded: ", data);
       })
       .fail(function(data) {
         console.error("Data Failed: ", data);
