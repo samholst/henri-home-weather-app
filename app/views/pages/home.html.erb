@@ -86,11 +86,11 @@
   function search(zip) {
     $.get( "/search", { zip: zip })
       .done(function(data) {
-        $('#high span').text(checkDisplayFormat(data.forcast.high));
-        $('#low span').text(checkDisplayFormat(data.forcast.low));
-        $('#average span').text(checkDisplayFormat(data.forcast.average));
-        $('#current-temp span').text(checkDisplayFormat(data.forcast.current_temp));
-        $('#current-zip').val(data.forcast.zip);
+        $('#high span').text(checkDisplayFormat(data.forecast.high));
+        $('#low span').text(checkDisplayFormat(data.forecast.low));
+        $('#average span').text(checkDisplayFormat(data.forecast.average));
+        $('#current-temp span').text(checkDisplayFormat(data.forecast.current_temp));
+        $('#current-zip').val(data.forecast.zip);
         console.log("Data Loaded: ", data);
       })
       .fail(function(data) {

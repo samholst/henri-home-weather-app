@@ -4,11 +4,11 @@ class PagesController < ApplicationController
   end
 
   def search
-    weather_forcast = Weather::Api.new(search_params[:zip])
-    result = weather_forcast.get_result
+    weather_forecast = Weather::Api.new(search_params[:zip])
+    result = weather_forecast.get_result
 
     if result
-      render json: { status: :created, forcast: result }
+      render json: { status: :created, forecast: result }
     else
       render json: { status: :unprocessable_entity }
     end

@@ -4,7 +4,7 @@ module Weather
   class Api
     BASE_URL = 'https://api.openweathermap.org/data/2.5/'
     ZIP_ENDPOINT = '/weather'
-    FORCAST_ENDPOINT = '/onecall'
+    FORECAST_ENDPOINT = '/onecall'
     APP_ID = 'cde0b64f65a24ac9a9c7d4d819cac2bb'
 
     def initialize(zip)
@@ -15,11 +15,11 @@ module Weather
       zip_response = fetch(build_zip_enpoint_url)
 
       if zip_response && zip_response["coord"]
-        forcast_response = fetch(
-            build_forcast_enpoint_url(zip_response["coord"]["lat"],
+        forecast_response = fetch(
+            build_forecast_enpoint_url(zip_response["coord"]["lat"],
             zip_response["coord"]["lon"])
           )
-        create_zip_forcast(forcast_response)
+        create_zip_forecast(forecast_response)
       else
         nil
       end
@@ -27,9 +27,9 @@ module Weather
 
     private
 
-    def create_zip_forcast(forcast_response)
-      if forcast_response
-        ZipForcast.new(forcast_response, @zip)
+    def create_zip_forecast(forecast_response)
+      if forecast_response
+        ZipForecast.new(forecast_response, @zip)
       else
         nil
       end
@@ -56,8 +56,8 @@ module Weather
       uri
     end
 
-    def build_forcast_enpoint_url(lat, lon)
-      uri = URI(BASE_URL + FORCAST_ENDPOINT)
+    def build_forecast_enpoint_url(lat, lon)
+      uri = URI(BASE_URL + FORECAST_ENDPOINT)
       params = {
         lat: lat,
         lon: lon,

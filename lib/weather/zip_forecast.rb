@@ -1,12 +1,12 @@
 module Weather
-  class ZipForcast
-    attr_reader :high, :low, :average, :zip, :hourly_forcasts, :current_temp
+  class ZipForecast
+    attr_reader :high, :low, :average, :zip, :hourly_forecasts, :current_temp
 
     def initialize(result, zip)
       @zip = zip
       @average = 0
       @temperatures = []
-      @hourly_forcasts = result["hourly"]
+      @hourly_forecasts = result["hourly"]
       @current_temp = result["current"]["temp"]
       parse_temperatures
       calculate_average
@@ -17,13 +17,13 @@ module Weather
     private
 
     def parse_temperatures
-      hourly_forcasts.each do |hour_forcast|
-        @temperatures.push(hour_forcast["temp"])
+      hourly_forecasts.each do |hour_forecast|
+        @temperatures.push(hour_forecast["temp"])
       end
     end
 
     def calculate_average
-      @average = @temperatures.sum / hourly_forcasts.length
+      @average = @temperatures.sum / hourly_forecasts.length
     end
 
     def calculate_low
