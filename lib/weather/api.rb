@@ -61,7 +61,8 @@ module Weather
       params = {
         lat: lat,
         lon: lon,
-        APPID: APP_ID
+        APPID: APP_ID,
+        units: 'metric'
       }
       uri.query = URI.encode_www_form(params)
 

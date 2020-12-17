@@ -3,7 +3,11 @@
 
   <br>
 
+  <input type="checkbox" id="show-celcius" name="show-celcius" checked>
+  <label for="show-celcius">Show in Celcius</label><br>
+
   <input id="current-zip" class="hidden"></input>
+
   <div id="current-temp">Current: <span>-</span>°</div>
   <div id="high">High: <span>-</span>°</div>
   <div id="low">Low: <span>-</span>°</div>
@@ -38,17 +42,17 @@
       var zip = $('#zip').val();
       search(zip);
       e.preventDefault();
-    })
+    });
 
     $('#update').click(function() {
       var zip = $('#current-zip').val();
       search(zip);
-     })
+    });
 
     $('.location').click(function() {
       var zip = $(this).text();
       search(zip);
-    })
+    });
 
     $('#save').click(function() {
       var zip = $('#zip').val();
@@ -64,21 +68,51 @@
         .fail(function(data) {
           console.error("Data Failed: ", data);
         });
-     })
+     });
+
+    $('#show-celcius').on('change', function(){
+      var isCelcius = $(this).prop("checked");
+
+      $('span').each(function() {
+        if (isCelcius) {
+          $(this).html(convertToCelcius($(this).html()));
+        } else {
+          $(this).html(convertToFahrenheit($(this).html()));
+        }
+      });
+    })
   });
 
   function search(zip) {
     $.get( "/search", { zip: zip })
       .done(function(data) {
-        $('#high span').text(data.forcast.high);
-        $('#low span').text(data.forcast.low);
-        $('#average span').text(data.forcast.average);
-        $('#current-temp span').text(data.forcast.current_temp);
+        $('#high span').text(checkDisplayFormat(data.forcast.high));
+        $('#low span').text(checkDisplayFormat(data.forcast.low));
+        $('#average span').text(checkDisplayFormat(data.forcast.average));
+        $('#current-temp span').text(checkDisplayFormat(data.forcast.current_temp));
         $('#current-zip').val(data.forcast.zip);
         console.log("Data Loaded: ", data);
       })
       .fail(function(data) {
         console.error("Data Failed: ", data);
       });
+  }
+
+  function checkDisplayFormat(value) {
+    var isCelcius = $('#show-celcius').prop("checked");
+
+    if (isCelcius) { return  Math.round(value * 10) / 10; }
+
+    return convertToFahrenheit(value);
+  }
+
+  function convertToFahrenheit(value) {
+    var temp = Number(value) * (9 / 5) + 32;
+    return Math.round(temp * 10) / 10;
+  }
+
+  function convertToCelcius(value) {
+    var temp = (Number(value) - 32) * (5 / 9);
+    return Math.round(temp * 10) / 10;
   }
 </script>
