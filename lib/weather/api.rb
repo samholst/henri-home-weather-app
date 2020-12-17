@@ -8,6 +8,7 @@ module Weather
     APP_ID = 'cde0b64f65a24ac9a9c7d4d819cac2bb'
 
     def initialize(zip)
+      raise Exception.new "zip cannot be empty" if zip.blank?
       @zip = zip
     end
 
