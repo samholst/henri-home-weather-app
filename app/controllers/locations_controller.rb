@@ -9,16 +9,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  def destroy
-    location = Location.find(location_params[:zip])
-
-    if location.destroy
-      render json: { status: :success }
-    else
-      render json: { status: :unprocessable_entity }
-    end
-  end
-
   private
 
   def location_params
