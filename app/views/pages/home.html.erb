@@ -49,7 +49,7 @@
       search(zip);
     });
 
-    $('.location').click(function() {
+    $(document).on('click', '.location', function() {
       var zip = $(this).text();
       search(zip);
     });

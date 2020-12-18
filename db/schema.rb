@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_12_17_050250) do
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "zip", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
