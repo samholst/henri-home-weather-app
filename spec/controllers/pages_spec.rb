@@ -22,6 +22,14 @@ RSpec.describe PagesController do
       post :search, params: { zip: 85339 }
 
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include("created")
+    end
+
+    it "can search with a blank zip" do
+      post :search, params: { zip:  "" }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("unprocessable_entity")
     end
   end
 end
