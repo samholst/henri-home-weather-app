@@ -2,7 +2,7 @@ require 'net/http'
 
 module Weather
   class Api
-    BASE_URL = 'https://api.openweathermap.org/data/2.5/'
+    BASE_URL = 'https://api.openweathermap.org/data/2.5'
     ZIP_ENDPOINT = '/weather'
     FORECAST_ENDPOINT = '/onecall'
     APP_ID = 'cde0b64f65a24ac9a9c7d4d819cac2bb'
