@@ -72,6 +72,8 @@
     $('#show-celcius').on('change', function(){
       var isCelcius = $(this).prop("checked");
 
+      if ($('#current-zip').val() === "") { return }
+
       $('span').each(function() {
         if (isCelcius) {
           $(this).html(convertToCelcius($(this).html()));
