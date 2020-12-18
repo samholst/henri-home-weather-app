@@ -19,6 +19,6 @@ RSpec.describe Weather::ZipForecast, type: :request do
     expect(zip_forecast.low).to be(8.52)
     expect(zip_forecast.average).to be(12.897916666666667)
     expect(zip_forecast.current_temp).to be(14.22)
-    expect(zip_forecast.hourly_forecasts).to eq(JSON.parse(File.open("#{Rails.root}/spec/mock_data/hourly_forecasts.txt").read))
+    expect(zip_forecast.hourly_forecasts).to eq(JSON.parse(File.open("#{Rails.root}/spec/mock_data/hourly_forecasts.json").read))
   end
 end
