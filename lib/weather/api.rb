@@ -5,6 +5,7 @@ module Weather
     BASE_URL = 'https://api.openweathermap.org/data/2.5'
     ZIP_ENDPOINT = '/weather'
     FORECAST_ENDPOINT = '/onecall'
+    # This can also go in a .env file
     APP_ID = 'cde0b64f65a24ac9a9c7d4d819cac2bb'
 
     def initialize(zip)
