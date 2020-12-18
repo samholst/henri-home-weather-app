@@ -96,4 +96,4 @@ RSpec.configure do |config|
 end
 
 require 'webmock/rspec'
-include WebMock
+include WebMock::API
