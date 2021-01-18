@@ -1,0 +1,74 @@
+require 'net/http'
+
+module Weather
+  class API 
+    BASE_URL = 'https://api.openweathermap.org/data/2.5'
+    ZIP_ENDPOINT = '/weather'
+    FORECAST_ENDPOINT = '/onecall'
+    APP_ID = Rails.application.credentials.weather_api_key
+
+    def initialize(zip:)
+      @zip = zip
+    end
+
+    def get_result
+      return nil if @zip.blank?
+
+      zip_response = fetch(build_zip_enpoint_url)
+
+      if zip_response && zip_response["coord"]
+        forecast_response = fetch(
+            build_forecast_enpoint_url(zip_response["coord"]["lat"],
+            zip_response["coord"]["lon"])
+          )
+        create_zip_forecast(forecast_response)
+      else
+        nil
+      end
+    end
+
+    private
+
+    def create_zip_forecast(forecast_response)
+      if forecast_response
+        ZipForecast.new(forecast_response, @zip)
+      else
+        nil
+      end
+    end
+
+    def fetch(url)
+      response = Net::HTTP.get_response(url)
+
+      if response.is_a?(Net::HTTPSuccess)
+        JSON.parse(response.body)
+      else
+        nil
+      end
+    end
+
+    def build_zip_enpoint_url
+      uri = URI(BASE_URL + ZIP_ENDPOINT)
+      params = {
+        zip: @zip,
+        APPID: APP_ID
+      }
+      uri.query = URI.encode_www_form(params)
+
+      uri
+    end
+
+    def build_forecast_enpoint_url(lat, lon)
+      uri = URI(BASE_URL + FORECAST_ENDPOINT)
+      params = {
+        lat: lat,
+        lon: lon,
+        APPID: APP_ID,
+        units: 'metric'
+      }
+      uri.query = URI.encode_www_form(params)
+
+      uri
+    end
+  end
+end

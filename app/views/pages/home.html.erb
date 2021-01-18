@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Welcome to the Weather App!</h1>
+
+  <br>
+
+  <input type="checkbox" id="show-celcius" name="show-celcius" checked>
+  <label for="show-celcius">Show in Celcius</label><br>
+
+  <input id="current-zip" class="hidden"></input>
+
+  <div id="current-temp">Current: <span>-</span>°</div>
+  <div id="high">High: <span>-</span>°</div>
+  <div id="low">Low: <span>-</span>°</div>
+  <div id="average">Average: <span>-</span>°</div>
+
+  <br>
+
+  <button type="button" class="btn  btn-small btn-primary" id="update">Update</button>
+
+  <br>
+  <br>
+
+  <form id="search-form" action="#">
+    <input type="number" placeholder="Enter Zip" id="zip" name="zip" required></input>
+    <input type="submit" class="btn btn-small" id="search" value="Submit"></input>
+    <button type="button" class="btn btn-small btn-success" id="save">Save</button>
+  </form>
+
+  <h1>Saved Locations</h1>
+  <div id="saved-zip-list">
+    <ul>
+    <% @locations.each do |location| %>
+      <li class="location"><%= location.zip %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>

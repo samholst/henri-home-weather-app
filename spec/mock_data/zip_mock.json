@@ -1,0 +1,43 @@
+{
+  "coord":{
+    "lon":-112.17,
+    "lat":33.34
+  },
+  "weather":[
+    {
+      "id":803,
+      "main":"Clouds",
+      "description":"broken clouds",
+      "icon":"04n"
+    }
+  ],
+  "base":"stations",
+  "main":{
+    "temp":287.37,
+    "feels_like":282.89,
+    "temp_min":286.48,
+    "temp_max":289.15,
+    "pressure":1011,
+    "humidity":25
+  },
+  "visibility":10000,
+  "wind":{
+    "speed":2.6,
+    "deg":130
+  },
+  "clouds":{
+    "all":75
+  },
+  "dt":1608253845,
+  "sys":{
+    "type":1,
+    "id":5347,
+    "country":"US",
+    "sunrise":1608215204,
+    "sunset":1608251013
+  },
+  "timezone":-25200,
+  "id":0,
+  "name":"Laveen",
+  "cod":200
+}
