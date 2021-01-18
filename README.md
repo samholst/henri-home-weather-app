@@ -1,24 +1,3 @@
-# README
+A simple weather app to retrieve the current, high, low, and average temperatures for a searched zip code in the moment it is requested.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+A very simple front end that allows zip codes to be saved and will display results in celcius or fahrenheit.
