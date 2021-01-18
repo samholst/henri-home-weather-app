@@ -7,7 +7,7 @@ module Weather
     FORECAST_ENDPOINT = '/onecall'
     APP_ID = Rails.application.credentials.weather_api_key
 
-    def initialize(zip)
+    def initialize(zip:)
       @zip = zip
     end
 

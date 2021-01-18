@@ -1,18 +1,14 @@
 RSpec.describe Weather::API, type: :request do
-  it 'can be instantiated with a zip' do
-    expect { Weather::API.new(85339) }.not_to raise_error(Exception)
-  end
-
-  it 'raises an expection without a zip' do
-    expect { Weather::API.new }.to raise_error(Exception)
+  it 'returns nil if get_results is called initialized with no zip' do
+    expect { Weather::API.new }.to raise_error(ArgumentError)
   end
 
   it 'raises an expection if a zip is blank' do
-    expect { Weather::API.new("") }.to raise_error(Exception)
+    expect(Weather::API.new(zip: "").get_result).to be(nil)
   end
 
   it 'should have an assigned zip' do
-    weather_api = Weather::API.new(85339)
+    weather_api = Weather::API.new(zip: 85339)
 
     expect(weather_api.instance_variable_get(:@zip)).to be(85339)
   end
@@ -22,7 +18,7 @@ RSpec.describe Weather::API, type: :request do
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'api.openweathermap.org', 'User-Agent'=>'Ruby'}).
       to_return(:status => 400, :body => "", :headers => {})
 
-    weather_api = Weather::API.new(85339)
+    weather_api = Weather::API.new(zip: 85339)
 
     expect(weather_api.get_result).to be(nil)
   end
@@ -36,7 +32,7 @@ RSpec.describe Weather::API, type: :request do
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'api.openweathermap.org', 'User-Agent'=>'Ruby'}).
       to_return(:status => 400, :body => "", :headers => {})
 
-    weather_api = Weather::API.new(85339)
+    weather_api = Weather::API.new(zip: 85339)
 
     expect(weather_api.get_result).to be(nil)
   end

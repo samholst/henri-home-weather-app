@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   end
 
   def search
-    weather_forecast = Weather::API.new(search_params[:zip])
+    weather_forecast = Weather::API.new(zip: search_params[:zip])
     result = weather_forecast.get_result
 
     if result
