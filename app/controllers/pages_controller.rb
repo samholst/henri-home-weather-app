@@ -4,12 +4,8 @@ class PagesController < ApplicationController
   end
 
   def search
-    begin
-      weather_forecast = Weather::API.new(search_params[:zip])
-      result = weather_forecast.get_result
-    rescue Exception
-      # will return unprocessable_entity
-    end
+    weather_forecast = Weather::API.new(search_params[:zip])
+    result = weather_forecast.get_result
 
     if result
       render json: { status: :created, forecast: result }
